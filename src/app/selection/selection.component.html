@@ -1,0 +1,23 @@
+<fieldset>
+  <div class="header">
+    <h2>{{title}}</h2>
+    <div class="subtitle" *ngIf="maxChoices > 1">
+      Choose up to {{maxChoices}} options
+      <ng-container [ngSwitch]="selectedOptions.length">
+        <span *ngIf="0"></span>
+        <span *ngIf="selectedOptions.length > 0">({{selectedOptions.length}} selected)</span>
+      </ng-container>
+    </div>
+  </div>
+  <div class="options">
+    <label *ngFor="let option of options">
+      <input 
+        [type]="maxChoices === 1 ? 'radio' : 'checkbox'" 
+        (change)="selectOption(option)"
+        [checked]="isSelected(option)" 
+        [disabled]="disabledOption(option)"
+      />
+      <span>{{option}}</span>
+    </label>
+  </div>
+</fieldset>
